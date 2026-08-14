@@ -9,7 +9,7 @@
 
     {{-- content you see when logged in --}}
     @auth
-        <p>Congratulations! You are logged in as {{ auth()->user()->name }}.</p>
+        <h2>Congratulations! You are logged in as {{ auth()->user()->name }}.</h2>
 
         <form action="/logout" method="POST">
             @csrf
@@ -30,6 +30,16 @@
                 @enderror
                 <button>Create Post</button>
             </form>
+        </div>
+
+        <div class="all-posts">
+            <h2>All Posts:</h2>
+            @foreach($posts as $post)
+                <div class="post">
+                    <h3>{{ $post['title'] }}</h3>
+                    {{ $post['content'] }}
+                </div>
+            @endforeach
         </div>
 
         <style>
@@ -77,6 +87,24 @@
                 font-size: 14px;
                 margin: -6px 0 12px;
             }
+
+            .all-posts {
+                margin-top: 40px;
+            }
+
+            .all-posts h2 {
+                margin-bottom: 20px;
+            }
+
+            .post {
+                background: #f9f9f9;
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            }
+
+
         </style>
     @else
 

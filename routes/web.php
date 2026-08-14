@@ -3,9 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 
 Route::get('/', function () {
-    return view('home');
+    $posts = [];
+    if (auth()->check())
+    {
+        $posts = auth()->user()->userCoolPosts()->latest()->get();
+        // $posts = Post::where('user_id', auth()->id())->latest()->get());
+    }
+    return view('home', ['posts' => $posts]);
 });
 
 Route::post('/register', [UserController::class, 'register']);
