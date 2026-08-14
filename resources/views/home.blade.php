@@ -38,6 +38,13 @@
                 <div class="post">
                     <h3>{{ $post['title'] }}</h3>
                     {{ $post['content'] }}
+
+                    <p><a href="/edit-post/{{ $post->id }}" class="edit-post">Edit</a></p>
+                    <form action="/delete-post/{{ $post->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="delete-button">Delete</button>
+                    </form>
                 </div>
             @endforeach
         </div>
@@ -48,7 +55,7 @@
                 padding: 30px 40px;
                 border-radius: 8px;
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-                width: 400px;
+                width: 400px;e"><
                 margin-top: 20px;
             }
 
@@ -104,7 +111,27 @@
                 box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
             }
 
+            .post h3 {
+                margin-top: 0;
+            }
 
+            .edit-post {
+                color: #1a73e8;
+                text-decoration: none;
+            }
+
+            .edit-post:hover {
+                text-decoration: underline;
+            }
+
+            .delete-button {
+                background: #e53935;
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 4px;
+                cursor: pointer;
+            }
         </style>
     @else
 
